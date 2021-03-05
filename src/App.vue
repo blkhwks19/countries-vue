@@ -9,7 +9,7 @@
       <span class="text-h5 ml-2">Countries of the World</span>
       <v-spacer></v-spacer>
 
-      <v-btn large href="" target="_blank">
+      <v-btn large href="https://github.com/blkhwks19/countries" target="_blank">
         <v-icon class="mr-2">mdi-github</v-icon>
         Github
       </v-btn>
