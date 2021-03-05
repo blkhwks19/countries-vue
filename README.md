@@ -1,19 +1,2 @@
-# countries
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Countries of the World
+This is a small demo project built with Vue/Vuetify whose primary purpose is to showcase consuming a 3rd-party API (https://restcountries.eu/).
