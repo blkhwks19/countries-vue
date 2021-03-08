@@ -69,10 +69,22 @@
           transition="dialog-top-transition"
         >
           <v-card>
-            <v-img 
+            <!-- MAP -->
+            <v-sheet width="450" height="300">
+              <MglMap 
+                :accessToken="accessToken" 
+                :mapStyle.sync="mapStyle" 
+                :center="center" 
+                :zoom.sync="zoom"
+              >
+                <MglNavigationControl position="top-right"/>
+              </MglMap>
+            </v-sheet>
+
+            <!-- <v-img 
               :src="country.flag"
               style="border-bottom: 1px solid rgba(0, 0, 0, 0.12)"
-            ></v-img>
+            ></v-img> -->
 
             <v-card-title>
               {{ country.name }}
@@ -154,12 +166,16 @@
 
 <script>
 import Region from '@/components/Region';
+import Mapbox from "mapbox-gl";
+import { MglMap, MglNavigationControl } from "vue-mapbox";
 
 export default {
   name: 'App',
 
   components: {
     Region,
+    MglMap,
+    MglNavigationControl,
   },
 
   data() {
@@ -172,7 +188,16 @@ export default {
       showDetails: false,
       showLang: false,
       showCurr: false,
+      accessToken: 'pk.eyJ1IjoiYmxraHdrczE5IiwiYSI6ImNrbHpldTJvMjFib2sydXA4bjluOXltNWcifQ.FphWr-2ysYbcTKbDQ4sCSA',
+      mapStyle: 'mapbox://styles/mapbox/streets-v11',
+      center: [0, 0],
+      zoom: 3,
     }
+  },
+
+  created() {
+    // We need to set mapbox-gl library here in order to use it in template
+    this.mapbox = Mapbox;
   },
 
   methods: {
@@ -188,6 +213,8 @@ export default {
 
     showCountry(country) {
       this.country = country;
+      this.center = [this.country.latlng[1], this.country.latlng[0]];
+      this.zoom = 3;
       this.showDialog = true;
     },
 
