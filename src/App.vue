@@ -77,7 +77,8 @@
                 :center="center" 
                 :zoom.sync="zoom"
               >
-                <MglNavigationControl position="top-right"/>
+                <!-- Nav control buttons are missing labels ??? -->
+                <!-- <MglNavigationControl position="top-right"/> -->
               </MglMap>
             </v-sheet>
 
@@ -104,6 +105,14 @@
                 </template>
                 <span>More Info</span>
               </v-tooltip>
+
+              <v-spacer></v-spacer>
+
+              <v-img 
+                :src="country.flag"
+                style="border: 1px solid rgba(0, 0, 0, 0.12); top:5px;"
+                max-width="47"
+              ></v-img>
             </v-card-title>
             <v-card-subtitle class="pb-2">{{ country.subregion }}</v-card-subtitle>
 
