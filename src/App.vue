@@ -9,7 +9,7 @@
       <span class="text-h5 ml-2">Countries of the World</span>
       <v-spacer></v-spacer>
 
-      <v-btn large href="https://github.com/blkhwks19/countries" target="_blank">
+      <v-btn large href="https://github.com/blkhwks19/countries-vue" target="_blank">
         <v-icon class="mr-2">mdi-github</v-icon>
         Github
       </v-btn>
@@ -79,6 +79,12 @@
               >
                 <!-- Nav control buttons are missing labels ??? -->
                 <!-- <MglNavigationControl position="top-right"/> -->
+                <!-- <MglGeojsonLayer
+                  sourceId="mySourceId"
+                  :source="geoJsonSource"
+                  layerId="myLayerId"
+                  :layer="geoJsonLayer"
+                /> -->
               </MglMap>
             </v-sheet>
 
@@ -176,7 +182,7 @@
 <script>
 import Region from '@/components/Region';
 import Mapbox from "mapbox-gl";
-import { MglMap, MglNavigationControl } from "vue-mapbox";
+import { MglMap, MglNavigationControl, MglGeojsonLayer } from "vue-mapbox";
 
 export default {
   name: 'App',
@@ -185,6 +191,7 @@ export default {
     Region,
     MglMap,
     MglNavigationControl,
+    MglGeojsonLayer,
   },
 
   data() {
@@ -201,6 +208,21 @@ export default {
       mapStyle: 'mapbox://styles/mapbox/streets-v11',
       center: [0, 0],
       zoom: 3,
+      // geoJsonSource: {
+      //   type: 'geojson',
+      //   data: {
+      //     type: 'Feature', 
+      //     properties: {
+      //       name: 'TEST NAME',
+      //     }, 
+      //   },
+      // },
+      // geoJsonLayer: {
+      //   type: 'line',
+      //   paint: {
+      //     'line-color': '#ff0000',
+      //   }
+      // }
     }
   },
 
@@ -222,8 +244,10 @@ export default {
 
     showCountry(country) {
       this.country = country;
+
       this.center = [this.country.latlng[1], this.country.latlng[0]];
       this.zoom = 3;
+      
       this.showDialog = true;
     },
 
