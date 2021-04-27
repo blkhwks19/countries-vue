@@ -7,6 +7,7 @@
     >
       <v-icon x-large>mdi-earth</v-icon>
       <span class="text-h5 ml-2">Countries of the World</span>
+
       <v-spacer></v-spacer>
 
       <v-btn large href="https://github.com/blkhwks19/countries-vue" target="_blank">
@@ -77,14 +78,7 @@
                 :center="center" 
                 :zoom.sync="zoom"
               >
-                <!-- Nav control buttons are missing labels ??? -->
-                <!-- <MglNavigationControl position="top-right"/> -->
-                <!-- <MglGeojsonLayer
-                  sourceId="mySourceId"
-                  :source="geoJsonSource"
-                  layerId="myLayerId"
-                  :layer="geoJsonLayer"
-                /> -->
+                <MglNavigationControl position="top-right" class="myClass" id="myId"/>
               </MglMap>
             </v-sheet>
 
@@ -182,7 +176,8 @@
 <script>
 import Region from '@/components/Region';
 import Mapbox from "mapbox-gl";
-import { MglMap, MglNavigationControl, MglGeojsonLayer } from "vue-mapbox";
+import { MglMap, MglNavigationControl } from "vue-mapbox";
+import "mapbox-gl/dist/mapbox-gl.css"; // Need this to fix missing control labels in map
 
 export default {
   name: 'App',
@@ -191,7 +186,6 @@ export default {
     Region,
     MglMap,
     MglNavigationControl,
-    MglGeojsonLayer,
   },
 
   data() {
@@ -200,7 +194,7 @@ export default {
       regions: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'],
       showScrollBtn: false,
       showDialog: false,
-      country: { population:0 },
+      country: { population: 0 },
       showDetails: false,
       showLang: false,
       showCurr: false,
@@ -208,26 +202,10 @@ export default {
       mapStyle: 'mapbox://styles/mapbox/streets-v11',
       center: [0, 0],
       zoom: 3,
-      // geoJsonSource: {
-      //   type: 'geojson',
-      //   data: {
-      //     type: 'Feature', 
-      //     properties: {
-      //       name: 'TEST NAME',
-      //     }, 
-      //   },
-      // },
-      // geoJsonLayer: {
-      //   type: 'line',
-      //   paint: {
-      //     'line-color': '#ff0000',
-      //   }
-      // }
     }
   },
 
   created() {
-    // We need to set mapbox-gl library here in order to use it in template
     this.mapbox = Mapbox;
   },
 
