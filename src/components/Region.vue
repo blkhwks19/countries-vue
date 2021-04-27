@@ -1,5 +1,16 @@
 <template>
   <div>
+
+    <v-row v-if="countries.length === 0">
+      <v-col cols="2">
+        <v-skeleton-loader
+          v-for="i in 8"
+          :key="i"
+          type="list-item-avatar-two-line"
+        ></v-skeleton-loader>
+      </v-col>
+    </v-row>
+
     <v-list two-line>
       <v-list-item
         v-for="(country, index) in countries"
@@ -47,8 +58,9 @@ export default {
         .then(data => this.countries = data)
         .catch(err => {
           console.log('ERROR GETTING COUNTRIES BY REGION');
-          console.log(err.message)
-        });
+          console.log(err.message);
+        })
+      ;
     },
 
     handleClick(country) {
